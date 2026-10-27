@@ -7,25 +7,58 @@
     <style>
         body {
             margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', sans-serif;
+
         }
         #board{
             display:grid;
             grid-template-columns: repeat(10, 50px);
             grid-template-rows: repeat(10, 50px);
-            width: 500px;
-            height: 500px;
-
+            width: 520px;
+            height: 520px;
+            gap: 2px;
+            background-color: lightgrey;
+            padding: 4px;
+            border-radius: 4px;
         }
         #board button{
-            color: black;
+            background-color: aliceblue;
+            color:aliceblue;
             font-size: 20px;
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', sans-serif;
             font-weight: bold;
-            
+            cursor: pointer;
+            outline: none;
+            border-radius: 2px;
+            border: 1px solid lightslategray; 
+        }
+        .controls {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 100px;
+            align-items: center;
+        }
+        .btn{
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: darkblue;
+            color: white;   
+        }
+        .btn:hover {
+            background-color: darkred;
+        }
+        #turn-info {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
     </style>
@@ -34,6 +67,17 @@
     <div>
         <h1>PIŠKVORKY S GRAVITACÍ</h1>
         <h3>Pro hraní klikněte na libovolné hrací pole</h3>
+    </div>
+
+    <div class="controls">
+        <div>
+            <button id="restart-btn" class="btn">Restartovat hru</button>
+        </div>
+
+        <div id="turn-info">
+            Na řadě je hráč: 
+            <span id="current-player">O</span>
+        </div>
     </div>
 
     <div id="board"></div>

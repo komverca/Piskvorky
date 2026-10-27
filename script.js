@@ -1,7 +1,10 @@
 const boardElement = document.getElementById("board")
-let hrac = "O";
+const currentPlayerElement = document.getElementById("current-player")
+const restartBtn = document.getElementById("restart-btn")
 
+let hrac = "O";
 let boardButtons = []
+let gameOver = false;
 
 for (let column = 0; column < 10; column++){
     boardButtons[column] = []
@@ -14,6 +17,8 @@ for (let row = 0; row < 10; row++) {
 
         boardButtons[column][row] = buttonElement
         buttonElement.addEventListener("click", event => {
+            if(gameOver) return;
+
             let lowestRow = -1
             for (let r = 9; r >= 0;r--){
                 if (boardButtons[column][r].innerHTML === "-"){
@@ -24,38 +29,64 @@ for (let row = 0; row < 10; row++) {
 
             if (lowestRow !== -1){
                 let targetButton = boardButtons[column][lowestRow]
+
+                targetButton.innerHTML = hrac;
                 if (hrac === "O"){
-                    targetButton.innerHTML = "O"
-                    targetButton.style.backgroundColor = "violet"
-                    winCheck(column, lowestRow, hrac)
-                    hrac = "X"
-                } else if (hrac === "X"){
-                    targetButton.innerHTML = "X"
-                    targetButton.style.backgroundColor = "cyan"
-                    winCheck(column, lowestRow, hrac)
-                    hrac = "O"
+                    targetButton.style.backgroundColor = "darkmagenta"
+
+                } else {
+                    targetButton.style.backgroundColor = "darkcyan"
                 }
+                if (winCheck(column, lowestRow, hrac)){
+                    gameOver = true
+                    setTimeout(() =>alert("HRÁČ " + hrac + " VYHRÁL!!!"), 10)
+                    return
+                }
+                
+                hrac = hrac === "O" ? "X" : "O"
+                updateTurnInfo();
 
             }
         })
-
         boardElement.appendChild(buttonElement)
     }
 }
 
+restartBtn.addEventListener("click", resetGame);
+
+function resetGame() {
+    hrac = "O";
+    gameOver = false;
+    updateTurnInfo();
+
+    for (let col = 0; col < 10; col++) {
+        for (let row = 0; row < 10; row++) {
+            const btn = boardButtons[col][row];
+            btn.innerHTML = "-";
+            btn.style.backgroundColor = "aliceblue";
+            btn.style.border = "1px solid lightslategray";
+        }
+    }
+}
+
+function updateTurnInfo() {
+    currentPlayerElement.innerText = hrac;
+}
+
+
+
+
 function winCheck (column, row, hrac){
-    let count = 0
     let targetButtonWin = boardButtons[column][row]
 
-    count = 0
+    let count = 0
     for (let c = column - 4; c <= column + 4; c++) {
         if (c >= 0 && c < 10) { 
             if (boardButtons[c][row].innerHTML === hrac) {
                 count++
                 if (count === 5) {
                     targetButtonWin.style.border = "5px solid red"
-                    alert("HRÁČ " + hrac + " VYHRÁL!!!")
-                    return
+                    return true
                 }
             } else {
                 count = 0
@@ -70,8 +101,7 @@ function winCheck (column, row, hrac){
                 count++
                 if (count === 5) {
                     targetButtonWin.style.border = "5px solid red"
-                    alert("HRÁČ " + hrac + " VYHRÁL!!!")
-                    return
+                    return true
                 }
             } else {
                 count = 0
@@ -88,8 +118,7 @@ function winCheck (column, row, hrac){
                 count++
                 if (count === 5) {
                     targetButtonWin.style.border = "5px solid red"
-                    alert("HRÁČ " + hrac + " VYHRÁL!!!")
-                    return
+                    return true
                 }
             } else {
                 count = 0
@@ -106,8 +135,7 @@ function winCheck (column, row, hrac){
                 count++
                 if (count === 5) {
                     targetButtonWin.style.border = "5px solid red"
-                    alert("HRÁČ " + hrac + " VYHRÁL!!!")
-                    return
+                    return true
                 }
             } else {
                 count = 0
@@ -115,4 +143,5 @@ function winCheck (column, row, hrac){
         }
     }
 
+    return false
 }
