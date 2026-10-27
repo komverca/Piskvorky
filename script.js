@@ -45,14 +45,17 @@ for (let row = 0; row < 10; row++) {
 
 function winCheck (column, row, hrac){
     let count = 0
+    let targetButtonWin = boardButtons[column][row]
 
     count = 0
     for (let c = column - 4; c <= column + 4; c++) {
         if (c >= 0 && c < 10) { 
             if (boardButtons[c][row].innerHTML === hrac) {
                 count++
-                if (count === 5) { alert("HRÁČ " + hrac + " VYHRÁL!!!")
-                     return
+                if (count === 5) {
+                    targetButtonWin.style.border = "5px solid red"
+                    alert("HRÁČ " + hrac + " VYHRÁL!!!")
+                    return
                 }
             } else {
                 count = 0
@@ -65,8 +68,10 @@ function winCheck (column, row, hrac){
         if (r >= 0 && r < 10) { 
             if (boardButtons[column][r].innerHTML === hrac) {
                 count++
-                if (count === 5) { alert("HRÁČ " + hrac + " VYHRÁL!!!")
-                     return
+                if (count === 5) {
+                    targetButtonWin.style.border = "5px solid red"
+                    alert("HRÁČ " + hrac + " VYHRÁL!!!")
+                    return
                 }
             } else {
                 count = 0
@@ -81,8 +86,10 @@ function winCheck (column, row, hrac){
         if (c >= 0 && c < 10 && r >= 0 && r < 10) { 
             if (boardButtons[c][r].innerHTML === hrac) {
                 count++
-                if (count === 5) { alert("HRÁČ " + hrac + " VYHRÁL!!!")
-                     return
+                if (count === 5) {
+                    targetButtonWin.style.border = "5px solid red"
+                    alert("HRÁČ " + hrac + " VYHRÁL!!!")
+                    return
                 }
             } else {
                 count = 0
@@ -97,8 +104,10 @@ function winCheck (column, row, hrac){
         if (c >= 0 && c < 10 && r >= 0 && r < 10) { 
             if (boardButtons[c][r].innerHTML === hrac) {
                 count++
-                if (count === 5) { alert("HRÁČ " + hrac + " VYHRÁL!!!")
-                     return
+                if (count === 5) {
+                    targetButtonWin.style.border = "5px solid red"
+                    alert("HRÁČ " + hrac + " VYHRÁL!!!")
+                    return
                 }
             } else {
                 count = 0

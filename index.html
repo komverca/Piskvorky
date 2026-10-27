@@ -5,21 +5,38 @@
     <title>Piskvorky s gravitaci</title>
     <script src="script.js" defer></script>
     <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
         #board{
             display:grid;
             grid-template-columns: repeat(10, 50px);
             grid-template-rows: repeat(10, 50px);
-            width: 100%;
+            width: 500px;
+            height: 500px;
+
         }
         #board button{
-            color: white;
+            color: black;
+            font-size: 20px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', sans-serif;
+            font-weight: bold;
+            
         }
 
     </style>
 </head>
 <body>
-    <div id="board">
-
+    <div>
+        <h1>PIŠKVORKY S GRAVITACÍ</h1>
+        <h3>Pro hraní klikněte na libovolné hrací pole</h3>
     </div>
+
+    <div id="board"></div>
+    
 </body>
 </html>
