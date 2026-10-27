@@ -26,10 +26,12 @@ for (let row = 0; row < 10; row++) {
                 let targetButton = boardButtons[column][lowestRow]
                 if (hrac === "O"){
                     targetButton.innerHTML = "O"
+                    targetButton.style.backgroundColor = "violet"
                     winCheck(column, lowestRow, hrac)
                     hrac = "X"
                 } else if (hrac === "X"){
                     targetButton.innerHTML = "X"
+                    targetButton.style.backgroundColor = "cyan"
                     winCheck(column, lowestRow, hrac)
                     hrac = "O"
                 }
@@ -59,7 +61,7 @@ function winCheck (column, row, hrac){
     }
 
     count = 0
-    for (let r = column - 4; r <= column + 4; r++) {
+    for (let r = row - 4; r <= row + 4; r++) {
         if (r >= 0 && r < 10) { 
             if (boardButtons[column][r].innerHTML === hrac) {
                 count++
@@ -74,8 +76,8 @@ function winCheck (column, row, hrac){
 
     count = 0
     for (let i = - 4; i <= 4; i++) {
-        let c = column + 1
-        let r = row + 1
+        let c = column + i
+        let r = row + i
         if (c >= 0 && c < 10 && r >= 0 && r < 10) { 
             if (boardButtons[c][r].innerHTML === hrac) {
                 count++
@@ -90,8 +92,8 @@ function winCheck (column, row, hrac){
 
     count = 0
     for (let i = - 4; i <= 4; i++) {
-        let c = column - 1
-        let r = row - 1
+        let c = column + i
+        let r = row - i
         if (c >= 0 && c < 10 && r >= 0 && r < 10) { 
             if (boardButtons[c][r].innerHTML === hrac) {
                 count++
