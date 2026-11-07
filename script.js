@@ -19,6 +19,8 @@ for (let row = 0; row < 10; row++) {
         buttonElement.addEventListener("click", event => {
             if(gameOver) return;
 
+    //AI Generated - Gemini
+    //pomoc s vymyšlení jak najít nejnižší volné pole ve sloupci
             let lowestRow = -1
             for (let r = 9; r >= 0;r--){
                 if (boardButtons[column][r].innerHTML === "-"){
@@ -26,7 +28,6 @@ for (let row = 0; row < 10; row++) {
                     break
                 }
             }
-
             if (lowestRow !== -1){
                 let targetButton = boardButtons[column][lowestRow]
 
@@ -39,13 +40,18 @@ for (let row = 0; row < 10; row++) {
                 }
                 if (winCheck(column, lowestRow, hrac)){
                     gameOver = true
+    //AI Used - Gemini
+    //setTimeout - protože se mi nevypisovalo poslední pole
                     setTimeout(() =>alert("HRÁČ " + hrac + " VYHRÁL!!!"), 10)
+                    return
+                }else if(remiza()){
+                    setTimeout(() =>alert("REMÍZA"), 10)
+                    gameOver = true
                     return
                 }
                 
                 hrac = hrac === "O" ? "X" : "O"
                 updateTurnInfo();
-
             }
         })
         boardElement.appendChild(buttonElement)
@@ -72,9 +78,6 @@ function resetGame() {
 function updateTurnInfo() {
     currentPlayerElement.innerText = hrac;
 }
-
-
-
 
 function winCheck (column, row, hrac){
     let targetButtonWin = boardButtons[column][row]
@@ -144,4 +147,15 @@ function winCheck (column, row, hrac){
     }
 
     return false
+}
+
+function remiza() {
+    for (let x = 0; x < 10; x++) {
+        for (let y = 0; y < 10; y++){
+            if(boardButtons[x][y].innerHTML === "-"){
+                return false
+            }
+        }
+    }
+    return true
 }
